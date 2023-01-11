@@ -22,10 +22,10 @@
           <img src="./assets/images/logo.png" alt="Today I learned" />
           <h1>Today I Learned</h1>
         </div>
-        <button class="btn btn-large">Compartí un dato</button>
+        <button class="btn btn-large btn-open">Compartí un dato</button>
       </header>
 
-      <form class="fact-form">
+      <form class="fact-form hidden">
         <input type="text" placeholder="Compartí un hecho con el mundo..." />
         <span>200</span>
         <input type="text" placeholder="Link de la fuente..." />
@@ -68,7 +68,7 @@
             </li>
           </ul>
         </aside>
-        <section>
+        <section class="facts-list">
           <ul>
             <li class="fact">
               <p>
@@ -112,5 +112,7 @@
         </section>
       </main>
     </div>
+
+    <script src="script.js" type="module"></script>
   </body>
 </html>
