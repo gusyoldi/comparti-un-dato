@@ -16,7 +16,7 @@ body {
 }
 
 /* MAIN LAYOUT */
-.container {
+#root {
   max-width: 1500px;
   margin: 0 auto;
 }
@@ -26,6 +26,15 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media (max-width: 640px) {
+  .header {
+    flex-wrap: wrap;
+  }
+  .header button {
+    flex-grow: 1;
+  }
 }
 
 .main {
@@ -212,7 +221,7 @@ ul {
   margin-right: 18px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
   body {
     padding: 32px 48px;
   }
