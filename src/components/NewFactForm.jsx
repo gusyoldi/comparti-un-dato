@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import supabase from "../supabase";
 
 // Validate Sources
 function isValidHttpUrl(string) {
@@ -14,35 +15,37 @@ function isValidHttpUrl(string) {
 
 export default function NewFactForm({ categories, setFacts, setShowForm }) {
   const [text, setText] = useState("");
-  const [source, setSource] = useState("http://ejemplo.com");
+  const [source, setSource] = useState("");
   const [category, setCategory] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
   const textLength = 200 - text.length;
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(text, source, category);
 
-    if (text.length <= 200 && isValidHttpUrl(source) && category)
+    if (text.length <= 200 && isValidHttpUrl(source) && category) {
       console.log("Data is correct");
+      setIsUploading(true);
 
-    const newFact = {
-      id: Math.round(Math.random() * 10000000),
-      text,
-      source,
-      category,
-      votesInteresting: 0,
-      votesMindblowing: 0,
-      votesFalse: 0,
-      createdIn: new Date().getFullYear(),
-    };
+      const { data: newFact, error } = await supabase
+        .from("facts")
+        .insert([{ text, source, category }])
+        .select();
+      if (!error) {
+        setFacts((facts) => [newFact[0], ...facts]);
+      } else {
+        console.log(error);
+      }
 
-    setFacts((facts) => [newFact, ...facts]);
+      setIsUploading(false);
+      setText("");
+      setSource("");
+      setCategory("");
 
-    setText("");
-    setSource("");
-    setCategory("");
-
-    setShowForm(false);
+      setShowForm(false);
+    } else {
+      alert("El link debe tener este formato: http://ejemplo.com");
+    }
   }
 
   return (
@@ -52,6 +55,7 @@ export default function NewFactForm({ categories, setFacts, setShowForm }) {
         placeholder="Compartí un dato con el mundo..."
         onChange={(e) => setText(e.target.value)}
         value={text}
+        disabled={isUploading}
       />
       <span>{textLength}</span>
       <input
@@ -59,8 +63,13 @@ export default function NewFactForm({ categories, setFacts, setShowForm }) {
         placeholder="Link de la fuente..."
         onChange={(e) => setSource(e.target.value)}
         value={source}
+        disabled={isUploading}
       />
-      <select onChange={(e) => setCategory(e.target.value)} value={category}>
+      <select
+        onChange={(e) => setCategory(e.target.value)}
+        value={category}
+        disabled={isUploading}
+      >
         <option value="">Categorias:</option>
         {categories.map((category) => (
           <option key={category.name} value={category.name}>
@@ -68,7 +77,11 @@ export default function NewFactForm({ categories, setFacts, setShowForm }) {
           </option>
         ))}
       </select>
-      <button className="btn btn-large" onClick={handleSubmit}>
+      <button
+        className="btn btn-large"
+        onClick={handleSubmit}
+        disabled={isUploading}
+      >
         Publicar
       </button>
     </form>
