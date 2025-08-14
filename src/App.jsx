@@ -1,23 +1,22 @@
-import "./style.css";
+import { useEffect, useState } from "react";
 import LOGO_IMG from "./assets/images/logo.png";
-import Header from "./components/Header";
-import NewFactForm from "./components/NewFactForm";
 import CategoryFilter from "./components/CategoryFilter";
 import FactList from "./components/FactsList";
-import { useState, useEffect } from "react";
+import Header from "./components/Header";
+import NewFactForm from "./components/NewFactForm";
+import "./style.css";
 import supabase from "./supabase";
 
 const CATEGORIES = [
-  { name: "tecnología", color: "#3b82f6" },
-  { name: "ciencia", color: "#16a34a" },
-  { name: "finanzas", color: "#ef4444" },
-  { name: "sociedad", color: "#eab308" },
-  { name: "entretenimiento", color: "#db2777" },
-  { name: "salud", color: "#14b8a6" },
-  { name: "historia", color: "#f97316" },
-  { name: "noticias", color: "#8b5cf6" },
+  { name: "technology", color: "#3b82f6" },
+  { name: "science", color: "#16a34a" },
+  { name: "finance", color: "#ef4444" },
+  { name: "society", color: "#eab308" },
+  { name: "entertainment", color: "#db2777" },
+  { name: "health", color: "#14b8a6" },
+  { name: "history", color: "#f97316" },
+  { name: "news", color: "#8b5cf6" },
 ];
-
 
 // const initialFacts = [
 //   {
@@ -61,28 +60,29 @@ const CATEGORIES = [
 //     votesFalse: 1,
 //     createdIn: 2015,
 //   },
- 
-// ];
 
+// ];
 
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [facts, setFacts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState("all")
+  const [currentCategory, setCurrentCategory] = useState("all");
 
   useEffect(() => {
     async function getFacts() {
       setIsLoading(true);
-      let query = supabase.from("facts").select("*")
+      let query = supabase.from("facts").select("*");
 
       if (currentCategory !== "all")
-      query = query.eq("category", currentCategory)
+        query = query.eq("category", currentCategory);
 
-      const { data: facts, error } = await query.order("votesInteresting", {ascending: false}).limit(100);
+      const { data: facts, error } = await query
+        .order("votesInteresting", { ascending: false })
+        .limit(100);
 
       if (!error) setFacts(facts);
-      else alert("Hubo un error al cargar los datos :(")
+      else alert("Hubo un error al cargar los datos :(");
       setIsLoading(false);
     }
     getFacts();
@@ -101,7 +101,10 @@ function App() {
       ) : null}
 
       <main className="main">
-        <CategoryFilter categories={CATEGORIES} setCurrentCategory={setCurrentCategory}/>
+        <CategoryFilter
+          categories={CATEGORIES}
+          setCurrentCategory={setCurrentCategory}
+        />
         {isLoading ? (
           <Loader />
         ) : (
