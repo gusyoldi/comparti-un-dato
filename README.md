@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# Compartí un Dato (Today I Learned) 🧠
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+¡Bienvenido a **Compartí un Dato**! Esta es una aplicación web interactiva donde los usuarios pueden descubrir y compartir datos curiosos e interesantes sobre diversos temas como tecnología, ciencia, historia, finanzas y más.
 
-## Available Scripts
+## 🚀 Características
 
-In the project directory, you can run:
+- **Explora Datos:** Navega por una lista de datos curiosos alimentada por la comunidad.
+- **Filtra por Categoría:** Encuentra datos específicos seleccionando categorías como Tecnología, Ciencia, Finanzas, Sociedad, Entretenimiento, Salud, Historia y Noticias.
+- **Comparte tu Conocimiento:** ¿Sabes algo interesante? ¡Compártelo con el mundo a través del formulario de "Nuevo Dato"!
+- **Vota:** Interactúa con los datos votando con reacciones:
+  - 👍 Interesante
+  - 🤯 Alucinante (Mindblowing)
+  - ⛔ Falso
+- **Datos en Tiempo Real:** La aplicación se conecta a Supabase para leer y escribir datos al instante.
 
-### `npm start`
+## 🛠️ Tecnologías Utilizadas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Este proyecto fue construido con las siguientes tecnologías:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Frontend:** [React](https://reactjs.org/) - Biblioteca de JavaScript para construir interfaces de usuario.
+- **Backend / Base de Datos:** [Supabase](https://supabase.com/) - Una alternativa de código abierto a Firebase.
+- **Estilos:** CSS3 moderno y diseño responsivo.
+- **Hosting:** GitHub Pages.
 
-### `npm test`
+## 📦 Instalación y Configuración
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Sigue estos pasos para correr el proyecto localmente:
 
-### `npm run build`
+1.  **Clona el repositorio:**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    ```bash
+    git clone https://github.com/tu-usuario/comparti-un-dato.git
+    cd comparti-un-dato
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2.  **Instala las dependencias:**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    ```bash
+    npm install
+    ```
 
-### `npm run eject`
+3.  **Configura las Variables de Entorno:**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    Crea un archivo `.env` en la raíz del proyecto y agrega tus credenciales de Supabase (puedes guiarte con `.env.example` si existe, o usar los nombres a continuación):
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    ```env
+    REACT_APP_SUPABASE_URL=tu_url_de_supabase
+    REACT_APP_SUPABASE_ANON_KEY=tu_anon_key_de_supabase
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4.  **Inicia el servidor de desarrollo:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    ```bash
+    npm start
+    ```
 
-## Learn More
+    La aplicación se abrirá en [http://localhost:3000](http://localhost:3000).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📜 Scripts Disponibles
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+En el directorio del proyecto, puedes ejecutar:
 
-### Code Splitting
+- `npm start`: Inicia la aplicación en modo desarrollo.
+- `npm run build`: Construye la aplicación para producción en la carpeta `build`.
+- `npm test`: Ejecuta los tests.
+- `npm run seed`: Carga datos iniciales en tu base de datos Supabase (requiere configuración previa de la tabla `facts`).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📂 Estructura del Proyecto
 
-### Analyzing the Bundle Size
+```
+comparti-un-dato/
+├── public/          # Archivos estáticos
+├── src/
+│   ├── assets/      # Imágenes y recursos
+│   ├── components/  # Componentes de React (Header, FactList, etc.)
+│   ├── seed/        # Scripts para poblar la base de datos
+│   ├── App.jsx      # Componente principal
+│   ├── supabase.js  # Configuración del cliente Supabase
+│   └── ...
+└── ...
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🤝 Contribución
 
-### Making a Progressive Web App
+¡Las contribuciones son bienvenidas! Si tienes alguna idea para mejorar la aplicación, siéntete libre de abrir un issue o enviar un pull request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+_Este proyecto es parte de un ejercicio de aprendizaje para dominar React y Supabase._
