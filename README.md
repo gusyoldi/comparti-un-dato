@@ -86,4 +86,4 @@ comparti-un-dato/
 
 ---
 
-_Este proyecto es parte de un ejercicio de aprendizaje para dominar React y Supabase._
+_Este proyecto es parte de un ejercicio de aprendizaje hecho en un curso de Jonas Schmedtmann para dominar React y Supabase._
